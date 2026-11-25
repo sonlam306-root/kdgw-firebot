@@ -1,0 +1,13 @@
+FireBot - Khung dinh vi tram goi chay (ADR-13) - file in 3D
+Vat lieu: PETG, 4 vach, infill 40 %, lop 0,2 mm. So luong cho 2 tram.
+
+File                    SL  Kich thuoc (mm)    Ghi chu in
+jig_post_lock.stl       2   114 x 88 x 51      In nguyen huong; ranh om thanh nam duoi ban, khong can support
+jig_mast_base.stl       2   96 x 90 x 90       In nguyen huong, khong can support
+jig_cam_head.stl        2   50 x 81 x 83       In ong dung; BAT support cho tay nghieng 40 do
+jig_tray_base.stl       2   116 x 120 x 50     In nguyen huong; 2 chot giu khay Ø200
+
+Phu kien: dai oc M8 nhet vao bay luc gan; bulong M8x60 (6/tram), vit M5x10, chot M4x40 (khoan ong Ø4,2 mot lan), bulong 1/4"x12 bat hop tram.
+Sat V lo 40x40x2: 2 thanh 1,5 m/tram + ke noi; ong nhom Ø25,4 x 1,4 m.
+Kiem tra truoc khi in: cot sat lo phai co lo o cao ~20 mm tu san (lo bulong khoa chan cot). Khac thi bao de doi lo.
+Nguon tham so: firebot_jig.scad (jp = "post_lock" | "mast_base" | "cam_head" | "tray_base" | "scene").

@@ -84,16 +84,17 @@ head_p = [0, -44, 62];
 // hộp trạm gọi bắt vào mặt nghiêng: mặt trước hộp nhìn chúc xuống cam_tilt, về phía ray (−Y)
 module head_box(){ translate(head_p) rotate([cam_tilt, 0, 0]) translate([0, -3 - 10 - gc[1]/2, -gc[2]/2]) call_box(); }
 
-// ---- 4. đế khay lửa demo: kẹp thanh ở 1 lỗ, khay inox Ø200 nằm trong vành
+// ---- 4. đế khay lửa demo: kẹp thanh ở 1 lỗ; khay inox Ø200 tì vào 2 chốt → tâm khay luôn cách thanh như nhau
+tray_peg = [124, 45];                                    // vị trí 2 chốt (x, ±y)
+tray_cx = tray_peg[0] + sqrt(pow(100 + 6, 2) - pow(tray_peg[1], 2));   // ≈ 220
 module tray_base(){
   difference(){
     union(){
       translate([16, -30, 0]) cube([60, 60, 50]);
-      translate([190, 0, 0]) cylinder(d=236, h=6);
-      translate([60, -12, 0]) cube([40, 24, 6]);
+      translate([60, -60, 0]) cube([72, 120, 6]);
+      for(sy=[-1, 1]) translate([tray_peg[0], sy*tray_peg[1], 0]) cylinder(d=12, h=26);
     }
     bar_channel(200);
-    translate([190, 0, 2]) cylinder(d=204, h=10);
     translate([8, 0, 18]) rotate([0, 90, 0]) cylinder(d=m8, h=60);
     translate([8, 0, 18]) rotate([0, 90, 0]) cylinder(d=m8n, h=10, $fn=6);
   }
@@ -115,7 +116,7 @@ module jig_scene(){
   translate([0, post_y, 0]) color("Orange") post_lock();
   translate([0, y_mast, 0]) { color("Orange") mast_base(); color("LightGray") translate([88, 0, 30]) cylinder(d=mast_d, h=mast_h); }
   translate([88, y_mast, 30 + mast_h - 35]) { color("Orange") cam_head(); color("Red") head_box(); }
-  translate([0, y_tray, 0]) { color("Orange") tray_base(); color("DimGray") translate([190, 0, 2]) cylinder(d=200, h=36); color("OrangeRed") translate([190, 0, 38]) cylinder(d1=110, d2=0, h=130); }
+  translate([0, y_tray, 0]) { color("Orange") tray_base(); color("DimGray") translate([tray_cx, 0, 0]) cylinder(d=200, h=36); color("OrangeRed") translate([tray_cx, 0, 36]) cylinder(d1=110, d2=0, h=130); }
   // tầm nhìn camera (minh hoạ)
   color("Red", 0.12) hull(){ translate([88, y_mast - 60, mast_h + 20]) sphere(d=8); translate([-700, 1000, 1]) cube([1600, 1500, 1]); }
 }

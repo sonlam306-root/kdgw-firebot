@@ -27,6 +27,9 @@ tools/                script sinh KiCad + autoroute (kigen), script vẽ PDF
 - PRODUCT (ADR-01…09): https://claude.ai/artifact/P67EzTibhUqXJA8hx2qiaA
 - BOM dự toán: https://claude.ai/artifact/SVUP8KTw6aWDFcNGWLDG2Z (≈ 24,8 triệu đ, đã gồm 10 % dự phòng)
 
+## Lắp đặt trạm gọi cháy
+Đo và dạy vị trí cho từng trạm theo `docs/Huong_dan_dat_tram_goi_chay.pdf` (ADR-12): dán thước số dọc ray, đo s_L, s_R bằng chân vuông góc, dạy trạm bằng ngọn nến, chạy thử không phun.
+
 ## Bước tiếp theo — thử nghiệm M0
 1. Lắp 1 module ray + bogie dưới, đo lực đẩy (cần ≥ 5 N liên tục).
 2. Thử bơm 12 V: đo tầm phun và lưu lượng.

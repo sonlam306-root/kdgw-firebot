@@ -6,6 +6,7 @@
 include <firebot.scad>
 part = "none";
 view = "system";
+ghostA = false;
 $fn = 32;
 
 L1 = 2500;        // đoạn thẳng 1 (5 module)
@@ -73,7 +74,7 @@ function s2p(s) = s <= L1 ? [s, post_y] :
 // ---------------- ROBOT (hệ toạ độ ray dưới: Z=0 là đáy ray) ----------------
 Lb = 200;   // khoảng cách 2 bogie
 module arm_link(len, d=34){ hull(){ sphere(d=d); translate([len,0,0]) sphere(d=d*0.85); } }
-module robot(spray=true){
+module robot(spray=true, yaw=90){
   // bogie + bánh
   for(x=[-Lb/2, Lb/2]) translate([x,0,0]){
     color("Gold") bogie(true);
@@ -85,23 +86,25 @@ module robot(spray=true){
   color("White") translate([-60, 120.5, -150]) cube([120, 0.5, 40]);           // nhãn
   color("Black") translate([-140, 30, -51]) cube([40, 40, 2]);                // tấm đồng sạc trên lưng
   color("DarkSlateGray") translate([-150, 0, -228]) cube([120, 100, 70]);     // hộp pin kín (ẩn trong thân)
-  // tay máy 3 khớp ở đáy thân, phía trước
-  translate([110, 60, -230]){
-    color("DimGray") translate([0,0,-30]) cylinder(d=60, h=30);                // khớp 1: xoay ngang
-    color("Black") translate([0,0,-48]) rotate([90,0,0]) cylinder(d=36, h=50, center=true); // khớp 2
-    rotate([0,0,90]) translate([0,0,-48]) {
-      rotate([0,40,0]) {
-        color("OrangeRed") arm_link(140);                                     // khâu 1
-        translate([140,0,0]) {
-          color("Black") rotate([90,0,0]) cylinder(d=32, h=44, center=true);  // khớp 3
-          rotate([0,-55,0]) {
-            color("OrangeRed") arm_link(120, 28);                             // khâu 2
-            translate([120,0,0]) {
-              color("Goldenrod") rotate([0,90,0]) cylinder(d=10, h=150);       // đầu phun ống cứng
-              color("Black") translate([150,0,0]) rotate([0,90,0]) cylinder(d1=12, d2=6, h=14);
-              color("Teal") translate([10,-12,14]) cube([30,24,16]);           // MLX90640
-              color("DarkRed") translate([-14,-10,-26]) cube([28,20,18]);      // van điện từ
-            }
+  // tay máy 3 khớp ở giữa đáy thân, phía trước (ADR-11: khớp 1 servo 270°, phun được cả 2 bên)
+  translate([110, 35, -230]) arm3(yaw);
+}
+// yaw: 90 = phía B (+Y), -90 = phía A (−Y), 0 = dọc ray (tư thế đỗ khi chạy)
+module arm3(yaw=90, a=1){
+  color("DimGray", a) translate([0,0,-30]) cylinder(d=60, h=30);                 // khớp 1: xoay ngang 270°
+  rotate([0,0,yaw]) translate([0,0,-48]) {
+    color("Black", a) rotate([90,0,0]) cylinder(d=36, h=50, center=true);         // khớp 2
+    rotate([0,40,0]) {
+      color("OrangeRed", a) arm_link(140);                                        // khâu 1
+      translate([140,0,0]) {
+        color("Black", a) rotate([90,0,0]) cylinder(d=32, h=44, center=true);     // khớp 3
+        rotate([0,-55,0]) {
+          color("OrangeRed", a) arm_link(120, 28);                                // khâu 2
+          translate([120,0,0]) {
+            color("Goldenrod", a) rotate([0,90,0]) cylinder(d=10, h=150);          // đầu phun ống cứng
+            color("Black", a) translate([150,0,0]) rotate([0,90,0]) cylinder(d1=12, d2=6, h=14);
+            color("Teal", a) translate([10,-12,14]) cube([30,24,16]);              // MLX90640
+            color("DarkRed", a) translate([-14,-10,-26]) cube([28,20,18]);         // van điện từ
           }
         }
       }
@@ -127,7 +130,7 @@ module ty_rods(){
 }
 module water_jet(){
   // tia nước minh hoạ: parabol từ đầu phun tới khay lửa
-  p0 = [rob_x+110, 470, zL-300];
+  p0 = [rob_x+110, 445, zL-300];
   for(t=[0:0.04:0.96]) {
     a = p0 + t*(fire+[0,0,60]-p0) + [0,0, 900*t*(1-t)];
     b = p0 + (t+0.04)*(fire+[0,0,60]-p0) + [0,0, 900*(t+0.04)*(1-t-0.04)];
@@ -182,8 +185,21 @@ module system(){
   camera_pole();
   fire_tray();
 }
+// nhìn dọc ray: 2 tư thế phun A/B, cột sắt lỗ phía A ở xa phía sau
+module twoside(){
+  robot_closeup();
+  translate([-600, 0, 0]) color("SteelBlue") translate([-20, post_y-20, 0]) difference(){ cube([40,40,zU+rail_h+120]); translate([2,2,-1]) cube([40,40,zU+rail_h+122]); }
+  for(z=[zL+han_z0+5, zU+han_z0+5]) color("SteelBlue") translate([-650, post_y-2, z-15]) cube([1300, 4, 30]);
+  color("Gainsboro") translate([-700, -1400, -2]) cube([1400, 2800, 2]);
+  for(sd=[-1,1]) { color("DimGray") translate([110, sd*1250, 0]) cylinder(d=200, h=40); color("OrangeRed") translate([110, sd*1250, 40]) cylinder(d1=120, d2=0, h=140); }
+  // tia nước minh hoạ 2 phía: B nét đậm, A nhạt
+  for(sd=[-1,1]) let(p0=[110, sd>0 ? 403 : -333, zL-298], p1=[110, sd*1250, 120])
+    for(t=[0:0.05:0.95]) let(a=p0+t*(p1-p0)+[0,0,450*t*(1-t)], b=p0+(t+0.05)*(p1-p0)+[0,0,450*(t+0.05)*(0.95-t)])
+      color("DeepSkyBlue", sd>0 ? 0.8 : 0.4) hull(){ translate(a) sphere(d=12); translate(b) sphere(d=12); }
+}
 module robot_closeup(){
   translate([0,0,zL]) { color("Silver") translate([-400,-rail_t/2,0]) cube([800,rail_t,rail_h]); robot(); }
+  if(ghostA) translate([0,0,zL]) translate([110, 35, -230]) arm3(-90, 0.45);   // tư thế phun phía A (ghost)
   translate([0,0,zU]) { color("Silver") translate([-400,-rail_t/2,0]) cube([800,rail_t,rail_h]); tank_unit(); }
   ty_rods();
   for(x=[-250, 250], z=[zL, zU]) color("Orange") translate([x,0,z]) hanger();
@@ -191,4 +207,5 @@ module robot_closeup(){
 
 if(view=="system")     system();
 if(view=="robot")      robot_closeup();
+if(view=="twoside")    twoside();
 if(view=="station")    { translate([0,0,0]) { level(zL,true); level(zU,true); station(); translate([250,0,zL]) robot(); translate([250,0,zU]) tank_unit(); translate([250,0,0]) ty_rods(); } }

@@ -7,6 +7,7 @@ FireBot là robot chữa cháy treo ngược dưới ray. Khi trạm gọi cháy
 | Ray | 2 tầng, nhôm dẹt 60×6 dựng đứng, dài 5 m hình chữ L, cua R600, mặt ray dưới cao 1,2 m so với sàn |
 | Truyền động | Bánh xe chịu tải (vòng bi U626ZZ, trục M6 cấp 12.9); động cơ tuyến tính 12 V ở **cả 2 tầng ray**, chạy cùng pha (ADR-10) nên bình tự đẩy, robot không kéo bình; chia 9 module |
 | Tốc độ | 1 m/s trên đoạn thẳng, 0,6 m/s khi vào cua |
+| Phun | Tay 3 khớp, khớp 1 xoay 270° (DS3225 bản 270°): phun được **cả 2 bên ray**, bên nào có cháy thì phun bên đó (ADR-11) |
 | Robot | Pin Li-ion 3S 12 V, bơm áp lực 12 V tầm phun 4–5 m, bình 3–4 L có cảm biến mực nước, phanh lò xo tự đóng khi mất điện |
 | Điều khiển | KD-GW điều phối qua ESP-NOW và làm cầu sang MQTT; 2 trạm gọi cháy dùng ESP32-S3-CAM + cảm biến IR + nút nhấn |
 

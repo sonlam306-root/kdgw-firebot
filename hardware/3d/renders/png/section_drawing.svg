@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1500" height="980" viewBox="0 0 1500 980"><rect width="1500" height="980" fill="white"/>
-<text x="30.0" y="66.0" font-size="13" text-anchor="start" font-weight="400" fill="#555" font-family="DejaVu Sans">Phía A (trái) = thanh treo + khung sắt lỗ, luôn ở PHÍA TRONG cua · Phía B (phải) = cuộn dây, bogie, robot, luôn ở PHÍA NGOÀI cua — vùng phun nên ở phía B</text>
+<text x="30.0" y="66.0" font-size="13" text-anchor="start" font-weight="400" fill="#555" font-family="DejaVu Sans">Phía A (trái) = thanh treo + khung sắt lỗ, luôn ở PHÍA TRONG cua · Phía B (phải) = cuộn dây, bogie, robot, luôn ở PHÍA NGOÀI cua — tay máy phun được cả 2 phía (ADR-11)</text>
 <text x="40.0" y="100.0" font-size="15" text-anchor="start" font-weight="700" fill="#222" font-family="DejaVu Sans">Tổng thể (tỉ lệ ~1:28)</text>
 <line x1="220.0" y1="930.0" x2="580.0" y2="930.0" stroke="#333" stroke-width="2"/>
 <text x="227.2" y="948.0" font-size="12" text-anchor="start" font-weight="400" fill="#222" font-family="DejaVu Sans">Sàn</text>

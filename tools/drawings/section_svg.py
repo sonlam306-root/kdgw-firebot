@@ -17,7 +17,7 @@ def dimv(x,z1,z2,label,P,side=1):
 W,H=1500,980
 out.append(f'<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewBox="0 0 {W} {H}"><rect width="{W}" height="{H}" fill="white"/>')
 
-T(30,66,"Phía A (trái) = thanh treo + khung sắt lỗ, luôn ở PHÍA TRONG cua · Phía B (phải) = cuộn dây, bogie, robot, luôn ở PHÍA NGOÀI cua — vùng phun nên ở phía B",13,fill="#555")
+T(30,66,"Phía A (trái) = thanh treo + khung sắt lỗ, luôn ở PHÍA TRONG cua · Phía B (phải) = cuộn dây, bogie, robot, luôn ở PHÍA NGOÀI cua — tay máy phun được cả 2 phía (ADR-11)",13,fill="#555")
 # ---------- Panel 1: tổng thể ----------
 s1=0.36; ox1,oz1=400,930
 P1=lambda y,z:(ox1+y*s1, oz1-z*s1)

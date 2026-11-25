@@ -83,9 +83,10 @@ module body_lid(front=true){
       translate([6, by0+5.5, 2]) cube([B[0]-13, B[1]-11, 3]);
     }
     if(front){
-      translate([110, 60, -1]) for(a=[45:90:315]) rotate([0,0,a]) translate([32,0,0]) cylinder(d=m4, h=10);
-      translate([110, 60, -1]) cylinder(d=14, h=10);        // dây servo khớp 1
-      translate([60, 60, -1])  cylinder(d=12.5, h=10);      // ống nước ra tay máy
+      // tay máy đặt giữa đáy thân (Y 35) để phun được cả phía A và B (ADR-11)
+      translate([110, 35, -1]) for(a=[45:90:315]) rotate([0,0,a]) translate([32,0,0]) cylinder(d=m4, h=10);
+      translate([110, 35, -1]) cylinder(d=14, h=10);        // dây servo khớp 1 + ống nước qua tâm khớp 1
+      translate([60, 35, -1])  cylinder(d=12.5, h=10);      // ống nước ra tay máy
     } else {
       // lỗ bắt giá bơm + khay pin
       for(x=[30, 140], y=[0, 70]) translate([x, y, -1]) cylinder(d=m4, h=10);
@@ -430,7 +431,7 @@ module module_lid(n=0){
 // LẮP RÁP XEM TRƯỚC (robot + bình trên 1 đoạn ray)
 // =====================================================================
 module arm_assembly(){
-  // gốc tại tâm khớp 1 dưới nắp đáy trước (toạ độ robot X 110, Y 60, Z -230)
+  // gốc tại tâm khớp 1 dưới nắp đáy trước (toạ độ robot X 110, Y 35, Z -230); khớp 1 servo 270°, 0° = dọc ray
   color("DimGray") arm_base();
   translate([0,0,-50]) rotate([0,0,90]) {
     color("SlateGray") translate([0,0,-6]) yaw_plate();
@@ -446,7 +447,7 @@ module robot_preview(){
     color("LightSteelBlue") translate([0,0,bz0-4]) body_lid(s>0);
     for(x=[hang_x]) translate([x, 0, 0]) color("Goldenrod") pivot_hanger(-1);
   }
-  translate([110, 60, bz0-4]) arm_assembly();
+  translate([110, 35, bz0-4]) arm_assembly();
   color("DarkSlateGray") translate([-90, 35, bz0+2]) battery_box();
   color("Gray") translate([-85, 60, bz0+2]) translate([0,0,0]) pump_cradle();
 }

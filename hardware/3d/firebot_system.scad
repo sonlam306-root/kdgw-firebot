@@ -111,7 +111,7 @@ module robot(spray=true){
 // ---------------- BÌNH NƯỚC (hệ toạ độ ray trên) ----------------
 module tank_unit(){
   for(x=[-Lb/2, Lb/2]) translate([x,0,0]){
-    color("Khaki") bogie(false);
+    color("Khaki") bogie(true, true);
     for(dx=[-wb/2, wb/2], z=[-wheel_cz, rail_h+wheel_cz]) color("DimGray") translate([dx,0,z]) rotate([-90,0,0]) cylinder(d=w_od, h=w_w, center=true);
     color("DarkKhaki") translate([-12, 35, 44]) cube([24, 20, 50]);
   }
@@ -153,10 +153,16 @@ module station(){
   color("WhiteSmoke") translate([-30, post_y-150, zL-300]) cube([150, 100, 220]);
   color("Red") translate([30, post_y-150.5, zL-130]) rotate([90,0,0]) cylinder(d=40, h=8); // nút dừng khẩn
 }
-module camera_pole(){
-  color("Gray") translate([3700, 3800, 0]) cylinder(d=40, h=2400);
-  color("Black") translate([3700, 3800, 2400]) rotate([0,30,-140]) cube([120, 60, 60], center=true);
+// trạm gọi cháy ESP32-S3-CAM + IR + nút (ADR-09), 2 trạm demo trên chân máy ảnh
+module call_station(p, yaw=0){
+  translate(p){
+    color("DimGray") for(a=[0,120,240]) translate([0,0,1150]) rotate([0,0,a]) rotate([0,160,0]) cylinder(d=14, h=1220);
+    color("Gray") translate([0,0,1100]) cylinder(d=24, h=300);
+    color("Red") translate([0,0,1440]) rotate([0,0,yaw]) cube([90, 66, 46], center=true);
+    color("Black") translate([0,0,1440]) rotate([0,0,yaw]) translate([-50,0,0]) rotate([0,90,0]) cylinder(d=14, h=8, center=true);
+  }
 }
+module camera_pole(){ call_station([700, 3700, 0], 40); call_station([3300, 2400, 0], 150); }
 module fire_tray(){
   color("DimGray") translate(fire) cylinder(d=200, h=40);
   color("OrangeRed") translate(fire+[0,0,40]) cylinder(d1=120, d2=0, h=140);
@@ -166,7 +172,7 @@ module floor_plate(){ color("Gainsboro") translate([-1200, -2700, -2]) cube([520
 module system(){
   floor_plate();
   level(zL, true);
-  level(zU, false);
+  level(zU, true);
   frame();
   translate([rob_x, 0, zL]) robot();
   translate([rob_x, 0, zU]) tank_unit();
@@ -185,4 +191,4 @@ module robot_closeup(){
 
 if(view=="system")     system();
 if(view=="robot")      robot_closeup();
-if(view=="station")    { translate([0,0,0]) { level(zL,true); level(zU,false); station(); translate([250,0,zL]) robot(); translate([250,0,zU]) tank_unit(); translate([250,0,0]) ty_rods(); } }
+if(view=="station")    { translate([0,0,0]) { level(zL,true); level(zU,true); station(); translate([250,0,zL]) robot(); translate([250,0,zU]) tank_unit(); translate([250,0,0]) ty_rods(); } }

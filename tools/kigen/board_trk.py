@@ -31,7 +31,8 @@ parts = [
     dict(ref="U2", sym="Regulator_Switching:R-78E5.0-0.5", val="R-78E5.0-0.5", fp="Converter_DCDC:Converter_DCDC_RECOM_R-78E-0.5_THT", pins={"1": "+12V", "2": "GND", "3": "+5V"}, at=(39.0, 21.0, 270), blk=P),
     C("C2", "10uF", "+5V", "GND", (32.5, 21.0, 90), P),
     C("C3", "100nF", "+12V", "GND", (44.0, 31.5, 0), P),
-    dict(ref="J2", sym="Connector_Generic:Conn_01x02", val="12V → VM driver", fp=TB2, pins={"1": "+12V", "2": "GND"}, at=(70.5, 17.5, 90), blk=P),
+    dict(ref="J2", sym="Connector_Generic:Conn_01x02", val="12V → VM driver ray dưới", fp=TB2, pins={"1": "+12V", "2": "GND"}, at=(70.5, 17.5, 90), blk=P),
+    dict(ref="J9", sym="Connector_Generic:Conn_01x02", val="12V → VM driver ray trên", fp=TB2, pins={"1": "+12V", "2": "GND"}, at=(70.5, 42.5, 90), blk=P),
     dict(ref="D2", sym="Device:LED", val="LED xanh 5V", fp="LED_SMD:LED_0805_2012Metric", pins={"1": "GND", "2": "LED_A"}, at=(35.0, 27.0, 90), blk=P),
     R("R10", "1k", "+5V", "LED_A", (35.0, 31.0, 90), P),
     dict(ref="#FLG1", sym="power:PWR_FLAG", val="PWR_FLAG", pins={"1": "+12V_IN"}, blk=P, nobom=True),
@@ -67,9 +68,9 @@ parts = [
     C("C6", "1nF", "HALL3", "GND", (19.5, 15.5, 90), H),
     dict(ref="J7", sym="Connector_Generic:Conn_01x02", val="LIMIT (SW G)", fp=XH(2), pins={"1": "LIM", "2": "GND"}, at=(4.0, 22.0, 90), blk=H),
     # ---- driver header
-    dict(ref="J6", sym="Connector_Generic:Conn_01x08", val="DRV: IN1 IN2 IN3 EN nFT nRT nSP G", fp="Connector_PinHeader_2.54mm:PinHeader_1x08_P2.54mm_Vertical",
-         pins={"1": "DRV_IN1", "2": "DRV_IN2", "3": "DRV_IN3", "4": "DRV_EN", "5": "DRV_nFT", "6": "DRV_nRT", "7": "DRV_nSP", "8": "GND"},
-         at=(31.0, 4.0, 90), blk=D),
+    dict(ref="J6", sym="Connector_Generic:Conn_02x08_Odd_Even", val="DRV ×2: hàng lẻ → driver ray dưới, hàng chẵn → driver ray trên", fp="Connector_PinHeader_2.54mm:PinHeader_2x08_P2.54mm_Vertical",
+         pins={'1': 'DRV_IN1', '2': 'DRV_IN1', '3': 'DRV_IN2', '4': 'DRV_IN2', '5': 'DRV_IN3', '6': 'DRV_IN3', '7': 'DRV_EN', '8': 'DRV_EN', '9': 'DRV_nFT', '10': 'DRV_nFT', '11': 'DRV_nRT', '12': 'DRV_nRT', '13': 'DRV_nSP', '14': 'DRV_nSP', '15': 'GND', '16': 'GND'},
+         at=(31.0, 5.5, 90), blk=D, note="2 driver chạy song song cùng tín hiệu: cuộn ray trên cùng pha với ray dưới (ADR-10)"),
     R("R4", "10k", "+3V3", "DRV_nFT", (36.0, 10.0, 0), D),
     R("R5", "10k", "+3V3", "DRV_nRT", (36.0, 13.0, 0), D),
     R("R6", "10k", "+3V3", "DRV_nSP", (36.0, 16.0, 0), D),
@@ -77,7 +78,7 @@ parts = [
 ]
 
 B = dict(
-    name="FB-TRK", title="FireBot – board module ray (×9)", date="2026-11-25", rev="A",
+    name="FB-TRK", title="FireBot – board module ray (×9), 2 driver: ray dưới + ray trên", date="2026-11-25", rev="A",
     comment="ESP32-C3 SuperMini · MAX3485 · R-78E5.0 · 3 Hall · DRV8313",
     parts=parts, w=76.0, h=56.0, ox=100.0, oy=100.0, corner=2.0,
     holes=[(6, 6), (70, 6), (6, 50), (70, 50)], hole_fp="MountingHole_2.7mm_M2.5",
@@ -85,10 +86,10 @@ B = dict(
     texts=[
         ("Arden", 66, 53.5, 0, "B.SilkS", 1.5),
         ("+12V", 63.5, 30.0, 0, "F.SilkS", 0.9), ("GND", 63.5, 24.9, 0, "F.SilkS", 0.9),
-        ("VM+", 63.5, 17.5, 0, "F.SilkS", 0.9), ("GND", 63.5, 12.4, 0, "F.SilkS", 0.9),
+        ("VM1+", 63.5, 17.5, 0, "F.SilkS", 0.9), ("GND", 63.5, 12.4, 0, "F.SilkS", 0.9), ("VM2+", 63.5, 42.5, 0, "F.SilkS", 0.9), ("GND", 63.5, 37.4, 0, "F.SilkS", 0.9),
         ("A    B    G", 36.1, 45.2, 0, "F.SilkS", 0.9), ("A    B    G", 53.6, 45.2, 0, "F.SilkS", 0.9), ("RS485 IN", 36.1, 43.6, 0, "F.SilkS", 0.8), ("RS485 OUT", 53.6, 43.6, 0, "F.SilkS", 0.8),
         ("5V G H1 H2 H3", 19.0, 8.0, 0, "F.SilkS", 0.8),
-        ("1 2 3 E F R S G", 40.0, 7.2, 0, "F.SilkS", 0.8),
+        ("1 2 3 E F R S G", 40.0, 8.7, 0, "F.SilkS", 0.8), ("DƯỚI", 52.6, 6.0, 0, "F.SilkS", 0.8), ("TRÊN", 52.6, 3.3, 0, "F.SilkS", 0.8),
         ("USB-C", 17.6, 53.0, 0, "F.SilkS", 0.9),
         ("5V G 3V3 4 3 2 1 0", 28.5, 35.0, 90, "F.SilkS", 0.8),
         ("5 6 7 8 9 10 20 21", 6.8, 35.0, 90, "F.SilkS", 0.8),

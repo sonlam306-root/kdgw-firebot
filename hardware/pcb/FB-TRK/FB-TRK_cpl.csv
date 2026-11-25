@@ -13,12 +13,13 @@ Ref,Val,Package,PosX,PosY,Rot,Side
 "D2","LED xanh 5V","LED_0805_2012Metric",135.000000,-127.000000,90.000000,top
 "F1","3A mini blade","Fuseholder_Blade_Mini_Keystone_3568",152.000000,-130.500000,90.000000,top
 "J1","12V IN","TerminalBlock_Phoenix_MKDS-1,5-2-5.08_1x02_P5.08mm_Horizontal",170.500000,-130.000000,90.000000,top
-"J2","12V → VM driver","TerminalBlock_Phoenix_MKDS-1,5-2-5.08_1x02_P5.08mm_Horizontal",170.500000,-117.500000,90.000000,top
+"J2","12V → VM driver ray dưới","TerminalBlock_Phoenix_MKDS-1,5-2-5.08_1x02_P5.08mm_Horizontal",170.500000,-117.500000,90.000000,top
 "J3","RS485 IN (A B G)","TerminalBlock_Phoenix_MKDS-1,5-3-5.08_1x03_P5.08mm_Horizontal",131.000000,-151.400000,0.000000,top
 "J4","RS485 OUT (A B G)","TerminalBlock_Phoenix_MKDS-1,5-3-5.08_1x03_P5.08mm_Horizontal",148.500000,-151.400000,0.000000,top
 "J5","HALL (5V G H1 H2 H3)","JST_XH_B5B-XH-A_1x05_P2.50mm_Vertical",114.000000,-104.000000,0.000000,top
-"J6","DRV: IN1 IN2 IN3 EN nFT nRT nSP G","PinHeader_1x08_P2.54mm_Vertical",131.000000,-104.000000,90.000000,top
+"J6","DRV ×2: hàng lẻ → driver ray dưới, hàng chẵn → driver ray trên","PinHeader_2x08_P2.54mm_Vertical",131.000000,-105.500000,90.000000,top
 "J7","LIMIT (SW G)","JST_XH_B2B-XH-A_1x02_P2.50mm_Vertical",104.000000,-122.000000,90.000000,top
+"J9","12V → VM driver ray trên","TerminalBlock_Phoenix_MKDS-1,5-2-5.08_1x02_P5.08mm_Horizontal",170.500000,-142.500000,90.000000,top
 "JP1","TERM 120R","PinHeader_1x02_P2.54mm_Vertical",156.500000,-137.000000,90.000000,top
 "R1","10k","R_0805_2012Metric",113.500000,-111.000000,90.000000,top
 "R2","10k","R_0805_2012Metric",116.500000,-111.000000,90.000000,top

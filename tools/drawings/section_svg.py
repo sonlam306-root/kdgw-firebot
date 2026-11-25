@@ -29,6 +29,7 @@ x,y=P1(hand_y-40,1900); R(x,y,40*s1,1900*s1,"#3b6ea5",op=0.85,stroke="#2c5282")
 for z0 in (zL,zU):
     x,y=P1(-3,z0+rail_h); R(x,y,rail_t*s1+1,rail_h*s1,"#999")
     x,y=P1(hand_y,z0+50); R(x,y,(abs(hand_y)-3)*s1,40*s1,"#f0a020",stroke="#b07010")
+    x,y=P1(3,z0+45); R(x,y,15*s1+1,30*s1,"#a9dfbf",stroke="#1e8449")
 # robot body & tank placeholders
 x,y=P1(-60,zL-wcz-30); R(x,y,120*s1,180*s1,"#7fb3d5",op=0.6,stroke="#2e86c1")
 T(P1(70,0)[0],P1(0,zL-130)[1],"Robot treo ngược",12)
@@ -36,6 +37,7 @@ x,y=P1(-70,zU+rail_h+wcz+12+190); R(x,y,140*s1,190*s1,"#aed6f1",op=0.6,stroke="#
 T(P1(80,0)[0],P1(0,zU+rail_h+110)[1],"Bình 3–4 L",12)
 L(*P1(44,zL+rail_h+wcz),*P1(44,zU-wcz),"#111",2)
 T(P1(55,0)[0],P1(0,(zL+zU)/2+40)[1],"thanh ty M8",11,fill="#444")
+T(P1(55,0)[0],P1(0,(zL+zU)/2-10)[1],"cuộn dây ở CẢ 2 tầng ray: bình tự đẩy, không để robot kéo",11,fill="#1e8449")
 # nozzle hint
 T(P1(70,0)[0],P1(0,zL-250)[1],"→ đầu phun ~0,85 m",11,fill="#555")
 dimv(P1(-300,0)[0],0,floor_top,"1200 (mép trên ray dưới)",P1,-1)
@@ -44,7 +46,7 @@ T(P1(hand_y-40,0)[0]-4,P1(0,1880)[1],"Cột/thanh sắt lỗ",11,"end",fill="#2c
 # ---------- Panel 2: chi tiết ray dưới ----------
 s2=2.6; ox2,oz2=1050,560
 P2=lambda y,z:(ox2+y*s2, oz2-z*s2)
-T(640,130,"Chi tiết ray dưới (tỉ lệ ~2,6:1, kích thước mm)",15,w="700")
+T(640,130,"Chi tiết ray — giống nhau ở cả 2 tầng (tỉ lệ ~2,6:1, mm)",15,w="700")
 # hanger (side A)
 x,y=P2(-3-han_t,50); R(x,y,han_t*s2,40*s2,"#f0a020",stroke="#b07010")
 x,y=P2(hand_y+end_t, 50); R(x,y,(arm_len)*s2,40*s2,"#f8c471",stroke="#b07010",op=0.6)

@@ -2,7 +2,7 @@
 
 | Board | Kích thước | SL | Gắn vào | File gửi xưởng |
 |---|---|---|---|---|
-| FB-TRK (module ray) | 76 × 56 mm, 2 lớp | 9 (+1 dự phòng) | hộp `module_box`, 4 trụ M2.5 (64 × 44) | `FB-TRK/FB-TRK_gerber.zip` |
+| FB-TRK (module ray, 2 driver: ray dưới + ray trên) | 76 × 56 mm, 2 lớp | 9 (+1 dự phòng) | hộp `module_box`, 4 trụ M2.5 (64 × 44) | `FB-TRK/FB-TRK_gerber.zip` |
 | FB-ROB (robot) | 84 × 84 mm, 2 lớp | 1 (+1 dự phòng) | khay `electronics_tray`, 4 trụ M3 (74 × 54) | `FB-ROB/FB-ROB_gerber.zip` |
 
 - Mở bằng KiCad 7 trở lên: `*.kicad_pro`, sơ đồ `*.kicad_sch`, mạch `*.kicad_pcb`. Sơ đồ nối bằng nhãn net, chưa vẽ dây.

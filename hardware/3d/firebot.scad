@@ -172,14 +172,14 @@ module children_unit_curve(){ seg_pocket_rim(); }
 // BOGIE RAY DƯỚI — 4 bánh rãnh U (2 trên tải, 2 dưới chống nhấc),
 // túi 4 nam châm xen kẽ N/S + thép lót, chốt xoay đứng M6 cho thân robot
 // =====================================================================
-module bogie(magnets=true){
+module bogie(magnets=true, upper=false){
   difference(){
     union(){
       translate([-bog_len/2, mag_face, -wheel_cz-8]) cube([bog_len, plate_y1-mag_face, rail_h+2*wheel_cz+16]);
       // khối chốt xoay
       translate([-14, plate_y1, rail_h/2-14]) cube([28, 22, 28]);
       // tai bắt thanh ty M8: bogie dưới ở mặt trên, bogie trên ở mặt dưới
-      if(magnets) translate([-12, plate_y1, rail_h+wheel_cz+8-10]) cube([24, 22, 10]);
+      if(!upper) translate([-12, plate_y1, rail_h+wheel_cz+8-10]) cube([24, 22, 10]);
       else        translate([-12, plate_y1, -wheel_cz-8]) cube([24, 22, 10]);
     }
     for(x=[-wb/2, wb/2], z=[-wheel_cz, rail_h+wheel_cz])
@@ -192,7 +192,7 @@ module bogie(magnets=true){
         cube([(mag_n-1)*tau+mag[0]+0.4, back_t+0.2, mag[1]+0.4]);
     }
     translate([0, plate_y1+12, rail_h/2]) cylinder(d=m6, h=40, center=true);         // chốt xoay
-    if(magnets) translate([0, plate_y1+12, rail_h+wheel_cz+3]) cylinder(d=m8, h=30, center=true); // thanh ty
+    if(!upper) translate([0, plate_y1+12, rail_h+wheel_cz+3]) cylinder(d=m8, h=30, center=true); // thanh ty
     else        translate([0, plate_y1+12, -wheel_cz-3]) cylinder(d=m8, h=30, center=true);
     // lỗ giảm khối lượng
     for(x=[-30, 30]) translate([x, plate_y1-1, rail_h+wheel_cz-2]) rotate([-90,0,0]) cylinder(d=10, h=bog_t+2, center=true);
@@ -235,8 +235,12 @@ module lower_level(){
 module upper_level(){
   rail_bar(module_L);
   for(x=[0, module_L]) color("Orange") translate([x,0,0]) hanger();
+  // ray trên cũng có cuộn dây (ADR-10): cùng pha với ray dưới, không cần Hall
+  for(s=[0:2]) color("LightGreen") translate([25 + s*seg_len, 0, 0]) coil_seg(hall = false);
+  for(s=[0:2], i=[0:coil_n-1]) color("Peru") translate([25 + s*seg_len + coil_pitch/2 + i*coil_pitch, 0, 0]) bobbin_placed();
   translate([module_L/2, 0, 0]) {
-    color("Khaki") bogie(false);
+    color("Khaki") bogie(true, true);
+    color("Red", 0.8) for(k=[0:mag_n-1]) translate([-(mag_n-1)*tau/2 + k*tau - mag[0]/2, mag_face, coil_z0]) cube([mag[0], mag[2], mag[1]]);
     for(x=[-wb/2, wb/2], z=[-wheel_cz, rail_h+wheel_cz]) translate([x,0,z]) wheel();
   }
 }
@@ -263,7 +267,7 @@ if(part=="coil_seg")       rotate([90,0,0]) translate([0, -rail_t/2, 0]) coil_se
 if(part=="coil_seg_hall")  rotate([90,0,0]) translate([0, -rail_t/2, 0]) coil_seg(true);
 if(part=="coil_seg_curve") translate([0,-curve_R,-base_z0]) coil_seg_curve();
 if(part=="bogie_lower")    translate([0,0,-mag_face]) rotate([90,0,0]) bogie(true);
-if(part=="bogie_upper")    translate([0,0,-mag_face]) rotate([90,0,0]) bogie(false);
+if(part=="bogie_upper")    translate([0,0,-mag_face]) rotate([90,0,0]) bogie(true, true);  // ray trên cũng có nam châm (ADR-10)
 if(part=="spacer")         spacer();
 if(part=="jig")            translate([0,0,rail_h+5]) rotate([180,0,0]) jig();
 if(part=="assembly")       assembly();

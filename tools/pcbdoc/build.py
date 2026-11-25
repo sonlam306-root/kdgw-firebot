@@ -1,13 +1,14 @@
 import sys, subprocess; sys.path.insert(0, '/home/claude/tools/pcbdoc'); from sheet import page
 D = '/home/claude/firebot-pcb'
-page(f'{D}/p_trk', 'FB-TRK — board module ray (làm 9 board, M0…M8)', '76 × 56 mm · 2 lớp · 4 lỗ M2.5 khớp trụ đỡ hộp module_box (64 × 44) · DRC 0 lỗi · rev A',
+page(f'{D}/p_trk', 'FB-TRK — board module ray (9 board, M0…M8), đẩy cả 2 tầng ray', '76 × 56 mm · 2 lớp · 4 lỗ M2.5 khớp trụ đỡ hộp module_box (64 × 44) · DRC 0 lỗi · rev A',
  f'{D}/FB-TRK/FB-TRK_top.png', f'{D}/FB-TRK/FB-TRK_bottom.png',
  [('Gán chân ESP32-C3 SuperMini', [('GPIO5/6/7', 'IN1 / IN2 / IN3 (PWM 3 pha)'), ('GPIO10', 'EN driver (kéo xuống 10k)'), ('GPIO2', 'nFAULT driver (kéo lên)'),
    ('GPIO0/1/3', 'HALL1 / HALL2 / HALL3'), ('GPIO8', 'công tắc hành trình'), ('GPIO20/21', 'RS485 RO / DI'), ('GPIO4', 'RS485 DE/RE (mặc định nhận)')]),
-  ('Đầu nối', [('J1', '12 V vào (sau công tắc tơ)'), ('J2', '12V ra → VM của driver'), ('J3 / J4', 'RS485 vào / ra (A B GND)'),
-   ('J5', 'Hall: 5V GND H1 H2 H3 (JST-XH)'), ('J6', 'Driver: IN1-3, EN, nFT, nRT, nSP, G'), ('J7', 'Công tắc hành trình (chỉ M0, M8)'), ('JP1', 'Jumper 120 Ω (chỉ M0, M8)')])],
- ['Driver DRV8313 (SimpleFOC Mini) nối bằng dây Dupont vào J6 — bản v1.0 và v1.1 khác thứ tự chân, nên đối dây theo chữ in trên driver.',
-  'Cuộn dây 3 pha nối thẳng vào cọc M1 M2 M3 của driver; VM driver lấy từ J2.',
+  ('Đầu nối', [('J1', '12 V vào (sau công tắc tơ)'), ('J2 / J9', 'VM driver ray dưới / ray trên'), ('J3 / J4', 'RS485 vào / ra (A B GND)'),
+   ('J5', 'Hall: 5V GND H1 H2 H3 (JST-XH)'), ('J6 (2×8)', 'Hàng dưới: ray dưới · hàng trên: ray trên'), ('J7', 'Công tắc hành trình (chỉ M0, M8)'), ('JP1', 'Jumper 120 Ω (chỉ M0, M8)')])],
+ ['Mỗi module 2 driver DRV8313 (SimpleFOC Mini) chạy song song cùng tín hiệu: cuộn ray trên lắp thẳng hàng và CÙNG PHA với ray dưới (ADR-10).',
+  'Nối dây Dupont vào J6 theo chữ in trên driver (v1.0 và v1.1 khác thứ tự chân). Cuộn ray dưới → driver hàng DƯỚI, ray trên → hàng TRÊN.',
+  'Cuộn dây 3 pha nối vào cọc M1 M2 M3 của driver, giữ cùng thứ tự pha A-B-C ở cả 2 tầng; VM lấy từ J2 và J9.',
   'Kiểm tra lại thứ tự chân in trên ESP32-C3 SuperMini trước khi hàn socket (vài lô có khác biệt); chữ in trên PCB ghi sẵn để so.',
   'U2 R-78E5.0-0.5 thay 7805, không cần tản nhiệt. Cầu chì mini 3 A cho mỗi module.',
   'Mặt dưới góc phải có chữ "Arden".'])

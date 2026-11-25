@@ -5,7 +5,7 @@ FireBot là robot chữa cháy treo ngược dưới ray. Khi trạm gọi cháy
 | Hạng mục | Thông số |
 |---|---|
 | Ray | 2 tầng, nhôm dẹt 60×6 dựng đứng, dài 5 m hình chữ L, cua R600, mặt ray dưới cao 1,2 m so với sàn |
-| Truyền động | Bánh xe chịu tải (vòng bi U626ZZ, trục M6 cấp 12.9); động cơ tuyến tính 12 V chỉ để đẩy, chia 9 module |
+| Truyền động | Bánh xe chịu tải (vòng bi U626ZZ, trục M6 cấp 12.9); động cơ tuyến tính 12 V ở **cả 2 tầng ray**, chạy cùng pha (ADR-10) nên bình tự đẩy, robot không kéo bình; chia 9 module |
 | Tốc độ | 1 m/s trên đoạn thẳng, 0,6 m/s khi vào cua |
 | Robot | Pin Li-ion 3S 12 V, bơm áp lực 12 V tầm phun 4–5 m, bình 3–4 L có cảm biến mực nước, phanh lò xo tự đóng khi mất điện |
 | Điều khiển | KD-GW điều phối qua ESP-NOW và làm cầu sang MQTT; 2 trạm gọi cháy dùng ESP32-S3-CAM + cảm biến IR + nút nhấn |
@@ -15,7 +15,7 @@ FireBot là robot chữa cháy treo ngược dưới ray. Khi trạm gọi cháy
 ```
 docs/                 bản vẽ tổng thể, catalog chi tiết in 3D, bản vẽ mạch in (PDF)
 hardware/3d/          mô hình OpenSCAD tham số + STL (45 file) + ảnh render
-hardware/pcb/FB-TRK/  board module ray ×9 (ESP32-C3, MAX3485, Hall, cổng driver DRV8313)
+hardware/pcb/FB-TRK/  board module ray ×9 (ESP32-C3, MAX3485, Hall, 2 driver DRV8313: ray dưới + ray trên)
 hardware/pcb/FB-ROB/  board robot (ESP32-S3 DevKitC, 3 ngõ MOSFET, 4 servo, cảm biến)
 firmware/             trk · rob · call · gw (chưa viết)
 tools/                script sinh KiCad + autoroute (kigen), script vẽ PDF

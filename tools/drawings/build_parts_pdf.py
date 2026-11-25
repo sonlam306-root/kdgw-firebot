@@ -8,11 +8,11 @@ G = [
  ("Ray & động cơ", [
   ("hanger", "Thanh treo + nối ray", "PETG 4 tường 40 %, in nằm nghiêng. Có thể thay bằng ke sắt lỗ + tấm kẹp in (đỡ ~3 kg nhựa)."),
   ("bobbin", "Bobbin cuộn dây", "PETG 3 tường 25 %. Quấn ~250 vòng dây emay Ø0,5."),
-  ("coil_seg", "Giá cuộn dây thẳng", "Bắt M3 xuyên ray, đầu ốc phía A, đai ốc phía B."),
+  ("coil_seg", "Giá cuộn dây thẳng", "Ray dưới 16 + ray trên 24 (ray trên không cần Hall). Bắt M3 xuyên ray."),
   ("coil_seg_hall", "Giá cuộn có dải Hall", "Đoạn đầu mỗi module; 3 khe Hall TO-92 cách 15 mm."),
   ("coil_seg_curve", "Giá cuộn cong R600", "Cho module cua M5; in đứng."),
   ("bogie_lower", "Bogie ray dưới", "PETG 5 tường 50 %. Túi 4 nam châm 20×30×5 + thép lót 1,5 mm."),
-  ("bogie_upper", "Bogie ray trên", "Không nam châm; tai thanh ty M8 ở mặt dưới."),
+  ("bogie_upper", "Bogie ray trên", "Có túi 4 nam châm như bogie dưới (ADR-10); tai thanh ty M8 ở mặt dưới."),
   ("spacer", "Ống cách trục bánh", "Hoặc ống nhôm 5/9 mm cắt sẵn."),
   ("jig", "Dưỡng khoan lỗ thanh treo", "Chụp mép trên ray, tì đầu ray vào gờ chặn."),
   ("end_stop", "Chặn cuối ray", "Đệm cao su + hốc công tắc KW11; bắt chung bulông thanh treo cuối.")]),
@@ -47,7 +47,7 @@ G = [
   ("call_lid_1", "Nắp trạm gọi cháy (1, 2)", "Chữ nổi 'GỌI CHÁY / TRẠM n'. Có file cho trạm 1 và 2."),
   ("module_box", "Hộp mạch module ray", "2 lỗ PG7, tai rãnh M8 bắt sắt lỗ."),
   ("module_lid_M3", "Nắp hộp module (M0…M8)", "Chữ nổi số module; 9 file riêng.")])]
-QTY_OVERRIDE = {"call_lid_1": 2, "module_lid_M3": 9}
+QTY_OVERRIDE = {"call_lid_1": 2, "module_lid_M3": 9, "coil_seg": 40, "coil_seg_curve": 12, "bobbin": 300}
 K.TOTAL = 6
 pages = []
 
@@ -71,7 +71,7 @@ pg.text(770, 273, "tấm mỏng × 0,95. Riêng 22 thanh treo đã chiếm ~3,3 
 pg.text(30, 520, "Mua kèm (không in)", 12, w="700")
 buy = [["Bình nhựa PP chữ nhật ~4 L (~220×150×120) + đầu nối ra ren", "Ống PU 8×5 mm ~3 m + co nối nhanh"],
        ["Ống đồng / inox Ø10 dài 150 mm làm đầu phun + béc Ø2–2,5", "Van điện từ 12V thường đóng (ren 1/4\")"],
-       ["Vòng bi U626ZZ 6×22×7 (16) + trục M6 12.9 + ống lót 6×8", "Nam châm NdFeB 20×30×5 (8 viên) + thép lót 1,5 mm"],
+       ["Vòng bi U626ZZ 6×22×7 (16) + trục M6 12.9 + ống lót 6×8", "Nam châm NdFeB 20×30×5 (16 viên) + thép lót 1,5 mm (4 tấm)"],
        ["Bulông M3/M4/M5/M6/M8, ốc cấy nhiệt M3, thanh ty M8", "Gioăng cao su 2 mm, đệm cao su, dây rút"],
        ["2 tiếp điểm lò xo Ø7 + tấm đồng 30×29 mm", "Nút nhấn đỏ Ø16, còi 5V, LED 5 mm (×2 trạm)"]]
 pg.table(30, 528, ["", ""], buy, [360, 360], 9, 15)

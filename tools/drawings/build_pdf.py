@@ -72,16 +72,17 @@ class Page:
 pages = []
 
 # ================= TỜ 1: TỔNG QUAN =================
-p = Page(1, "Tổng quan hệ thống", "Ray 2 tầng chữ L dài ~5 m treo trên khung sắt lỗ; camera báo cháy → robot chạy tới, ngắm bằng cảm biến nhiệt, phun 4–5 m; trạm chính sạc pin + tiếp nước")
+p = Page(1, "Tổng quan hệ thống", "Ray 2 tầng chữ L dài ~5 m, cả 2 tầng có cuộn dây; trạm gọi cháy ESP32-S3-CAM → robot + bình cùng được đẩy tới, ngắm bằng cảm biến nhiệt, phun 4–5 m; trạm chính sạc + tiếp nước")
 ox, oy, s = p.image(f"{D}/sys_iso.png", 26, 76, 790, 494)
 p.balloons(ox, oy, s, [
-    (1, 1632, 396, -10, 40), (2, 1680, 292, 30, -30), (3, 1890, 360, 20, -36), (4, 1644, 600, 30, 0),
-    (5, 1476, 228, -30, -36), (6, 1476, 426, -40, 22), (7, 1398, 498, -30, 30), (8, 840, 840, 0, -30),
-    (9, 246, 1404, 30, -20), (10, 1818, 900, 30, 10), (11, 2058, 564, 30, 20), (12, 1188, 204, -30, -26)])
+    (1, 1740, 360, 0, 44), (2, 1700, 278, 30, -34), (3, 1850, 372, 24, 40), (4, 1610, 520, 34, 0),
+    (5, 1454, 196, -10, -40), (6, 1452, 380, -40, 26), (7, 1400, 446, -36, 30), (8, 1040, 800, 30, -20),
+    (9, 640, 1400, 34, -16), (10, 1830, 770, 34, 10), (11, 2000, 456, 34, 20), (12, 1130, 160, -34, -24),
+    (13, 576, 446, -34, -20), (13, 1260, 900, 34, -20)])
 p.text(840, 92, "Chú thích", 13, w="700")
 p.table(840, 100, ["#", "Bộ phận"], [
     ["1", "Ray dưới nhôm 60×6 + cuộn dây động cơ tuyến tính"],
-    ["2", "Ray trên nhôm 60×6 (chỉ bánh xe, không cuộn)"],
+    ["2", "Ray trên nhôm 60×6 + cuộn dây (đẩy bình, ADR-10)"],
     ["3", "Thanh treo in 3D tại mỗi mối nối 0,5 m"],
     ["4", "Khung sắt lỗ: cột ~1,25 m + 2 thanh ngang"],
     ["5", "Bình nước 3–4 L trên bogie ray trên"],
@@ -91,7 +92,7 @@ p.table(840, 100, ["#", "Bộ phận"], [
     ["9", "Khay lửa demo (phía B, ngoài chữ L)"],
     ["10", "Trạm chính: bể chứa + bơm tiếp nước"],
     ["11", "Hộp KD-GW + nút dừng khẩn (đầu tuyến)"],
-    ["12", "Cua 90° R600 (module M5)"]], [26, 290])
+    ["12", "Cua 90° R600 (module M5)"], ["13", "Trạm gọi cháy ×2 (ESP32-S3-CAM + IR + nút)"]], [26, 290])
 yy = p.table(840, 318, ["Thông số", "Giá trị"], [
     ["Tổng chiều dài ray", "~4,94 m (2,5 + cua 0,94 + 1,5)"],
     ["Cao mép trên ray dưới", "1 200 mm so với sàn"],
@@ -113,7 +114,7 @@ p.text(30, 592, "Hình phối cảnh dựng từ mô hình OpenSCAD tham số (f
 # sơ đồ luồng nhiệm vụ
 fx, fy = 30, 616
 p.text(fx, fy, "Luồng một nhiệm vụ", 12, w="700")
-steps = ["Camera thấy lửa", "Pi 5 tính điểm đích", "Ray đẩy robot tới", "Cảm biến nhiệt ngắm", "Phun đến khi tắt", "Về trạm: sạc + tiếp nước"]
+steps = ["Trạm gọi cháy báo", "KD-GW chọn điểm đích", "Ray đẩy robot + bình", "Cảm biến nhiệt ngắm", "Phun đến khi tắt", "Về trạm: sạc + tiếp nước"]
 bw, gap = 128, 14
 for i, st in enumerate(steps):
     x = fx + i*(bw+gap)
@@ -187,8 +188,8 @@ p.text(P(250, 0)[0], P(0, -380)[1], "Robot ở trạm (sạc + tiếp nước)",
 # khay lửa + camera
 fx_, fy_ = 2000, 4300
 X, Y = P(fx_, fy_); p.circle(X, Y, 100*sc, "#e74c3c", "#922b21"); p.text(X + 16, Y + 4, "Khay lửa demo (ví dụ)", 9)
-X, Y = P(3700, 3800); p.rect(X-5, Y-5, 10, 10, INK, INK); p.text(X + 9, Y + 4, "Camera Pi 5 (trên cột ~2,4 m)", 9)
-p.path(f"M{X} {Y} L{P(300, 2600)[0]:.1f} {P(300, 2600)[1]:.1f} M{X} {Y} L{P(3300, -300)[0]:.1f} {P(3300, -300)[1]:.1f}", "#888", 0.8, dash="2 3")
+for cx_, cy_, nm in ((700, 3700, "Trạm gọi cháy 1"), (3300, 2400, "Trạm gọi cháy 2")):
+    X, Y = P(cx_, cy_); p.rect(X-5, Y-5, 10, 10, "#c0392b", "#922b21"); p.text(X + 9, Y + 4, nm + " (ESP32-S3-CAM)", 9)
 # robot đang chạy
 X, Y = P(rx, 0); p.rect(X - 170*sc, Y - 120*sc, 340*sc, 170*sc, "#5dade2", "#1f618d", 1)
 p.text(X, Y + 30, "Robot", 9, "middle", "700", "#1f618d")
@@ -223,8 +224,8 @@ p.rect(lx, ly + 158, 400, 110, "#f4f6f7", "#bbb", 0.6, 4)
 for i, t in enumerate(["Đặt tuyến sao cho phía ngoài chữ L (phía B) là khoảng trống trong phòng:",
                        "đó là vùng phun và chỗ đặt khay lửa. Phía trong chữ L dành cho khung.",
                        "Trạm chính ở M0 (đầu đoạn thẳng 1), cuối M8 có tấm chặn.",
-                       "Camera đặt ở góc đối diện, nhìn bao cả 2 đoạn ray và vùng phun.",
-                       "Vị trí khay lửa và camera trên hình chỉ là ví dụ."]):
+                       "2 trạm gọi cháy trên chân máy ảnh, mỗi trạm gắn sẵn 1 điểm đích trên ray.",
+                       "Vị trí khay lửa và trạm gọi cháy trên hình chỉ là ví dụ."]):
     p.text(lx + 10, ly + 176 + i*17, t, 9.2)
 pages.append(p)
 
@@ -234,7 +235,7 @@ p.image(f"{D}/section_drawing.png", 22, 70, 1146, 700)
 pages.append(p)
 
 # ================= TỜ 4: ROBOT =================
-p = Page(4, "Robot, bình nước & tay máy", "Robot treo ngược dưới ray dưới; bình 3–4 L chạy trên ray trên; 2 cặp bogie nối cứng bằng thanh ty M8")
+p = Page(4, "Robot, bình nước & tay máy", "Robot treo ngược dưới ray dưới; bình 3–4 L chạy trên ray trên; cả 2 bogie đều có nam châm và được đẩy cùng pha, nối bằng thanh ty M8")
 ox, oy, s = p.image(f"{D}/robot_iso.png", 22, 72, 560, 460)
 p.balloons(ox, oy, s, [
     (1, 720, 300, -60, -10), (2, 815, 160, -50, -10), (3, 902, 215, 60, -10), (4, 770, 395, -70, -20), (5, 763, 540, -70, 0),
@@ -309,20 +310,20 @@ ox, oy, s = p.image(f"{D}/lower_iso_B.png", 22, 72, 600, 450)
 p.balloons(ox, oy, s, [(1, 380, 205, -30, -36), (2, 470, 330, -40, 40), (3, 1048, 512, 40, 40), (4, 640, 470, 30, 70), (5, 600, 440, -50, 60),
                        (6, 742, 360, 30, -40), (7, 300, 255, -20, -40), (8, 1000, 468, 30, -50)])
 ox, oy, s = p.image(f"{D}/assembly_B.png", 630, 72, 520, 372)
-p.text(640, 462, "Một module 2 tầng: bogie ray trên & ray dưới nối bằng thanh ty; khối robot / bình là khối giữ chỗ.", 9, fill=QUIET, italic=True)
+p.text(640, 462, "Một module 2 tầng: cuộn dây ở cả 2 ray, 2 bogie có nam châm nối bằng thanh ty; robot / bình là khối giữ chỗ.", 9, fill=QUIET, italic=True)
 y2 = p.table(30, 540, ["#", "Chi tiết", "In / mua", "Số lượng (cả tuyến)"], [
     ["1", "Thanh treo + nối ray (hanger)", "In PETG", "22"],
-    ["2", "Bobbin cuộn dây 28×30, quấn ~250 vòng Ø0,5", "In PETG", "150"],
+    ["2", "Bobbin cuộn dây 28×30, quấn ~250 vòng Ø0,5", "In PETG", "300 (2 tầng)"],
     ["3", "Giá cuộn có dải 3 Hall (coil_seg_hall)", "In PETG", "8"],
-    ["4", "Bogie ray dưới — túi 4 nam châm 20×30×5", "In PETG", "2"],
+    ["4", "Bogie dưới + trên — túi 4 nam châm 20×30×5", "In PETG", "2 + 2"],
     ["5", "Khối chốt xoay M6 (liền bogie)", "—", "—"],
     ["6", "Vòng bi U626ZZ + trục M6 12.9, ống lót", "Mua", "16"],
     ["7", "Ray nhôm dẹt 60×6", "Mua", "~10 m (2 tầng)"],
-    ["8", "Giá cuộn thường / cong R600", "In PETG", "16 / 6"]], [24, 270, 90, 140], 9, 15)
+    ["8", "Giá cuộn thường / cong R600", "In PETG", "40 / 12"]], [24, 270, 90, 140], 9, 15)
 p.table(640, 476, ["Thông số động cơ", "Giá trị"], [
     ["Bước cực τ", "22,5 mm"], ["Bước cuộn", "30 mm (3 cuộn / 4 cực)"], ["Cuộn / module", "15 = 3 pha × 5"],
     ["Hall", "3 cái cách 15 mm (120° điện)"], ["Khe hở cuộn–nam châm", "3 mm"], ["Nam châm / bogie", "4 viên NdFeB, xen kẽ N-S"],
-    ["Lực cần đạt (cổng M0)", "≥ 5 N liên tục, ~8 N đỉnh"], ["Cấp điện", "12V, chỉ module có robot"]], [170, 200], 9, 15)
+    ["Lực cần đạt (cổng M0)", "≥ 5 N liên tục, ~8 N đỉnh"], ["Cấp điện", "12V, 2 driver/module, chỉ module có robot"]], [170, 200], 9, 15)
 p.rect(640, 640, 520, 66, "#fdf2e9", "#e59866", 0.8, 4)
 p.text(650, 658, "Vì sao cuộn dây ở phía ngoài cua", 10.5, w="700", fill="#a04000")
 p.text(650, 675, "Dãy nam châm thẳng dài ~88 mm đi qua cua R600 lệch khỏi ray khoảng 1,6 mm ở hai đầu.", 9.3)

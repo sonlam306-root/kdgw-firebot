@@ -28,6 +28,8 @@ tools/                script sinh KiCad + autoroute (kigen), script vẽ PDF
 - BOM dự toán: https://claude.ai/artifact/SVUP8KTw6aWDFcNGWLDG2Z (≈ 24,8 triệu đ, đã gồm 10 % dự phòng)
 
 ## Lắp đặt trạm gọi cháy
+Mang đi triển lãm: dùng **khung định vị** (ADR-13, `hardware/3d/firebot_jig.scad`, STL ở `hardware/3d/stl_jig/`) — thanh sắt V lỗ bắt vào chân cột P2/P6, cột camera cắm đúng lỗ, chỉ hiệu chuẩn 1 lần ở nhà rồi chọn cấu hình trên dashboard.
+
 Đo và dạy vị trí cho từng trạm theo `docs/Huong_dan_dat_tram_goi_chay.pdf` (ADR-12): dán thước số dọc ray, đo s_L, s_R bằng chân vuông góc, dạy trạm bằng ngọn nến, chạy thử không phun.
 
 ## Bước tiếp theo — thử nghiệm M0

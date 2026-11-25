@@ -1,0 +1,38 @@
+﻿Ref,Giá trị,Footprint,SL
+A1,S3 J1: 3V3 3V3 RST 4 5 6 7 15 16 17 18 8 3 46 9 10 11 12 13 14 5V G,PinSocket_1x22_P2.54mm_Vertical,1
+A2,S3 J3: G TX RX 1 2 42 41 40 39 38 37 36 35 0 45 48 47 21 20 19 G G,PinSocket_1x22_P2.54mm_Vertical,1
+C1,470uF 25V,CP_Radial_D10.0mm_P5.00mm,1
+C2,22uF,C_0805_2012Metric,1
+C3 C4 C5 C7,100nF,C_0805_2012Metric,4
+C6,1000uF 16V,CP_Radial_D10.0mm_P5.00mm,1
+C8,10uF,C_0805_2012Metric,1
+D1,SMBJ15CA,D_SMB,1
+D2,LED xanh 5V,LED_0805_2012Metric,1
+D3,SS54,D_SMB,1
+D4 D5,SS34,D_SMA,2
+F1,10A mini blade,Fuseholder_Blade_Mini_Keystone_3568,1
+J1,PIN 12V (từ BMS),"TerminalBlock_Phoenix_MKDS-1,5-2-5.08_1x02_P5.08mm_Horizontal",1
+J2,Bơm 12V (+ −),"TerminalBlock_Phoenix_MKDS-1,5-2-5.08_1x02_P5.08mm_Horizontal",1
+J3,Van 12V (+ −),"TerminalBlock_Phoenix_MKDS-1,5-2-5.08_1x02_P5.08mm_Horizontal",1
+J4,Phanh 12V (+ −),"TerminalBlock_Phoenix_MKDS-1,5-2-5.08_1x02_P5.08mm_Horizontal",1
+J5,"Nguồn servo 6,8V (từ buck)","TerminalBlock_Phoenix_MKDS-1,5-2-5.08_1x02_P5.08mm_Horizontal",1
+J6,SERVO1 (G V S),PinHeader_1x03_P2.54mm_Vertical,1
+J7,SERVO2 (G V S),PinHeader_1x03_P2.54mm_Vertical,1
+J8,SERVO3 (G V S),PinHeader_1x03_P2.54mm_Vertical,1
+J9,SERVO4 (G V S),PinHeader_1x03_P2.54mm_Vertical,1
+J10,ÁP SUẤT (5V G OUT),JST_XH_B3B-XH-A_1x03_P2.50mm_Vertical,1
+J11,MỰC NƯỚC XKC-Y25 NPN (5V G OUT),JST_XH_B3B-XH-A_1x03_P2.50mm_Vertical,1
+J12,MLX90640 I2C (3V3 G SDA SCL),JST_XH_B4B-XH-A_1x04_P2.50mm_Vertical,1
+J13,BÁO SẠC (CHG+ G),JST_XH_B2B-XH-A_1x02_P2.50mm_Vertical,1
+J14,MỞ RỘNG (3V3 G IO21 IO7),JST_XH_B4B-XH-A_1x04_P2.50mm_Vertical,1
+Q1 Q2 Q3,AOD4184A,TO-252-2,3
+R1 R35,100k,R_0805_2012Metric,2
+R2 R36,22k,R_0805_2012Metric,2
+R11 R12 R13 R17 R18 R19 R30 R32,10k,R_0805_2012Metric,8
+R14 R15 R16,47,R_0805_2012Metric,3
+R20,1k,R_0805_2012Metric,1
+R21 R22 R23 R24,330,R_0805_2012Metric,4
+R31,20k,R_0805_2012Metric,1
+R33 R34,4k7,R_0805_2012Metric,2
+U2,R-78E5.0-1.0,Converter_DCDC_RECOM_R-78E-0.5_THT,1
+U3 U4 U5,74AHCT1G125,SOT-23-5,3
